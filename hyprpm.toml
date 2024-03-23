@@ -5,7 +5,7 @@ authors = ["Duckonaut"]
 [split-monitor-workspaces]
 description = "Split monitor workspaces"
 authors = ["Duckonaut"]
-output = "build/libsplit-monitor-workspaces.so"
+output = "libsplit-monitor-workspaces.so"
 build = [
     "meson setup build --wipe",
     "meson compile -C build",
