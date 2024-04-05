@@ -97,7 +97,7 @@ void changeMonitor(bool quiet, std::string value)
 
     nextMonitor = g_pCompositor->m_vMonitors[nextMonitorIndex].get();
 
-    int nextWorkspace = nextMonitor->activeWorkspace;
+    int nextWorkspace = nextMonitor->activeWorkspaceID();
 
     if (quiet) {
         HyprlandAPI::invokeHyprctlCommand("dispatch", "movetoworkspacesilent " + std::to_string(nextWorkspace));
@@ -138,7 +138,7 @@ void mapWorkspacesToMonitors()
             std::string workspaceName = std::to_string(i);
             g_vMonitorWorkspaceMap[monitor->ID].push_back(workspaceName);
             HyprlandAPI::invokeHyprctlCommand("keyword", "workspace " + workspaceName + "," + monitor->szName);
-            CWorkspace* workspace = g_pCompositor->getWorkspaceByName(workspaceName);
+            PHLWORKSPACE workspace = g_pCompositor->getWorkspaceByName(workspaceName);
 
             if (workspace != nullptr) {
                 g_pCompositor->moveWorkspaceToMonitor(workspace, monitor.get());
