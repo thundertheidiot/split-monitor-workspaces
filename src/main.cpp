@@ -21,8 +21,8 @@ const CColor s_pluginColor = {0x61 / 255.0f, 0xAF / 255.0f, 0xEF / 255.0f, 1.0f}
 
 std::map<uint64_t, std::vector<std::string>> g_vMonitorWorkspaceMap;
 
-static HOOK_CALLBACK_FN* e_monitorAddedHandle = nullptr;
-static HOOK_CALLBACK_FN* e_monitorRemovedHandle = nullptr;
+std::shared_ptr<HOOK_CALLBACK_FN> e_monitorAddedHandle = nullptr;
+std::shared_ptr<HOOK_CALLBACK_FN> e_monitorRemovedHandle = nullptr;
 
 const std::string& getWorkspaceFromMonitor(CMonitor* monitor, const std::string& workspace)
 {
