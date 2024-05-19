@@ -21,8 +21,8 @@ const CColor s_pluginColor = {0x61 / 255.0f, 0xAF / 255.0f, 0xEF / 255.0f, 1.0f}
 
 std::map<uint64_t, std::vector<std::string>> g_vMonitorWorkspaceMap;
 
-std::shared_ptr<HOOK_CALLBACK_FN> e_monitorAddedHandle = nullptr;
-std::shared_ptr<HOOK_CALLBACK_FN> e_monitorRemovedHandle = nullptr;
+SP<HOOK_CALLBACK_FN> e_monitorAddedHandle = nullptr;
+SP<HOOK_CALLBACK_FN> e_monitorRemovedHandle = nullptr;
 
 const std::string& getWorkspaceFromMonitor(CMonitor* monitor, const std::string& workspace)
 {
@@ -32,7 +32,7 @@ const std::string& getWorkspaceFromMonitor(CMonitor* monitor, const std::string&
         workspaceIndex = std::stoi(workspace) - 1;
     }
     catch (std::invalid_argument&) {
-        Debug::log(WARN, "Invalid workspace index: %s", workspace.c_str());
+        // Debug::log(WARN, "Invalid workspace index: %s", workspace.c_str());
         return workspace;
     }
 
@@ -85,7 +85,7 @@ void changeMonitor(bool quiet, std::string value)
         delta = -1;
     }
     else {
-        Debug::log(WARN, "Invalid monitor value: %s", value.c_str());
+        // Debug::log(WARN, "Invalid monitor value: %s", value.c_str());
         return;
     }
 
