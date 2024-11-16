@@ -24,7 +24,7 @@ std::map<uint64_t, std::vector<std::string>> g_vMonitorWorkspaceMap;
 SP<HOOK_CALLBACK_FN> e_monitorAddedHandle = nullptr;
 SP<HOOK_CALLBACK_FN> e_monitorRemovedHandle = nullptr;
 
-const std::string& getWorkspaceFromMonitor(CMonitor* monitor, const std::string& workspace)
+const std::string& getWorkspaceFromMonitor(PHLMONITOR monitor, const std::string& workspace)
 {
     int workspaceIndex = 0;
     try {
@@ -49,28 +49,28 @@ const std::string& getWorkspaceFromMonitor(CMonitor* monitor, const std::string&
 
 void splitWorkspace(std::string workspace)
 {
-    CMonitor* monitor = g_pCompositor->getMonitorFromCursor();
+    PHLMONITOR monitor = g_pCompositor->getMonitorFromCursor();
 
     HyprlandAPI::invokeHyprctlCommand("dispatch", "workspace " + getWorkspaceFromMonitor(monitor, workspace));
 }
 
 void splitMoveToWorkspace(std::string workspace)
 {
-    CMonitor* monitor = g_pCompositor->getMonitorFromCursor();
+    PHLMONITOR monitor = g_pCompositor->getMonitorFromCursor();
 
     HyprlandAPI::invokeHyprctlCommand("dispatch", "movetoworkspace " + getWorkspaceFromMonitor(monitor, workspace));
 }
 
 void splitMoveToWorkspaceSilent(std::string workspace)
 {
-    CMonitor* monitor = g_pCompositor->getMonitorFromCursor();
+    PHLMONITOR monitor = g_pCompositor->getMonitorFromCursor();
 
     HyprlandAPI::invokeHyprctlCommand("dispatch", "movetoworkspacesilent " + getWorkspaceFromMonitor(monitor, workspace));
 }
 
 void changeMonitor(bool quiet, std::string value)
 {
-    CMonitor* monitor = g_pCompositor->getMonitorFromCursor();
+    PHLMONITOR monitor = g_pCompositor->getMonitorFromCursor();
 
     CMonitor* nextMonitor = nullptr;
 
@@ -141,7 +141,7 @@ void mapWorkspacesToMonitors()
             PHLWORKSPACE workspace = g_pCompositor->getWorkspaceByName(workspaceName);
 
             if (workspace != nullptr) {
-                g_pCompositor->moveWorkspaceToMonitor(workspace, monitor.get());
+                g_pCompositor->moveWorkspaceToMonitor(workspace, monitor);
             }
         }
 
